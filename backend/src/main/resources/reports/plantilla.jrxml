@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Plantilla sencilla para demostrar la generación del informe -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+    name="plantilla" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c2cde073-0e52-4a04-83a0-57c7ea46d8d9">
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+    <parameter name="nombreCliente" class="java.lang.String"/>
+    <parameter name="fechaInforme" class="java.util.Date"/>
+    <parameter name="importeTotal" class="java.math.BigDecimal"/>
+    <title>
+        <band height="120" splitType="Stretch">
+            <staticText>
+                <reportElement x="0" y="0" width="555" height="30" uuid="1d4b9dc1-e7df-4a08-a0ea-9e33c8c5286c"/>
+                <textElement textAlignment="Center">
+                    <font size="18" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Informe de ejemplo JasperReports]]></text>
+            </staticText>
+            <line>
+                <reportElement x="0" y="34" width="555" height="1" uuid="e37e80b1-afd7-4d93-8d74-f9d8c6e9080d"/>
+            </line>
+            <textField>
+                <reportElement x="0" y="50" width="555" height="20" uuid="bfb95c32-3e13-4d20-9e8b-c5f7b7146c40"/>
+                <textElement>
+                    <font size="12"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Cliente: " + $P{nombreCliente}]]></textFieldExpression>
+            </textField>
+            <textField pattern="dd/MM/yyyy">
+                <reportElement x="0" y="75" width="555" height="20" uuid="5fa7e8a6-0f73-4c1a-9d67-5a7f54d9cb03"/>
+                <textElement>
+                    <font size="12"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Fecha del informe: " + $P{fechaInforme}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0.00" isBlankWhenNull="true">
+                <reportElement x="0" y="100" width="555" height="20" uuid="ac6dc600-84e4-4bc1-81bd-46b10d9f61e4"/>
+                <textElement>
+                    <font size="12"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Importe total: " + $P{importeTotal}]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+</jasperReport>
