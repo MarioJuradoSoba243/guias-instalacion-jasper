@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.codex.jasper.backend.model.ReportRequest;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,7 +25,16 @@ class ReportServiceTest {
 
     @Test
     void generateReportShouldReturnPdfWithContent() throws IOException {
-        ReportRequest request = new ReportRequest("Cliente Demo", LocalDate.of(2024, 1, 1), new BigDecimal("1234.56"));
+        ReportRequest request = new ReportRequest(
+                "DOCUMENTO DE INSTALACIÓN",
+                "PRODUCCIÓN",
+                "PCM",
+                "Alarmado Tráfico Internacional",
+                "5.4.0",
+                "Telefónica Móviles España",
+                LocalDate.of(2025, 11, 10),
+                "1.0",
+                "TME");
 
         byte[] pdfBytes = reportService.generateReport(request);
 
@@ -34,6 +43,10 @@ class ReportServiceTest {
 
         try (PDDocument document = Loader.loadPDF(pdfBytes)) {
             assertArrayEquals(new int[]{1}, new int[]{document.getNumberOfPages()}, "El PDF debería tener una página");
+            String text = new PDFTextStripper().getText(document);
+            assertTrue(text.contains("DOCUMENTO DE INSTALACIÓN"));
+            assertTrue(text.contains("Telefónica Móviles España"));
+            assertTrue(text.contains("1.0"));
         }
     }
 }

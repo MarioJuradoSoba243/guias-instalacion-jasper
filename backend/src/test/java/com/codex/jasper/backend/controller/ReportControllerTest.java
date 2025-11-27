@@ -6,7 +6,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,9 +32,15 @@ class ReportControllerTest {
     @Test
     void generateReportEndpointShouldReturnPdf() throws Exception {
         Map<String, Object> body = new HashMap<>();
-        body.put("nombreCliente", "Cliente Test");
-        body.put("fechaInforme", LocalDate.of(2024, 5, 20));
-        body.put("importeTotal", new BigDecimal("2500.50"));
+        body.put("documentoTitulo", "DOCUMENTO DE INSTALACIÓN");
+        body.put("entorno", "PRODUCCIÓN");
+        body.put("plataforma", "PCM");
+        body.put("funcionalidad", "Alarmado Tráfico Internacional");
+        body.put("version", "5.4.0");
+        body.put("destinatario", "Telefónica Móviles España");
+        body.put("fecha", LocalDate.of(2025, 11, 10));
+        body.put("revision", "1.0");
+        body.put("cliente", "TME");
 
         byte[] response = mockMvc.perform(post("/api/report")
                         .contentType(MediaType.APPLICATION_JSON)

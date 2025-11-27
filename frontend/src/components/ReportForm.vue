@@ -2,16 +2,40 @@
   <form class="form" @submit.prevent="submitForm">
     <div class="form-grid">
       <div>
-        <label for="nombre">Nombre del cliente</label>
-        <input id="nombre" v-model="form.nombreCliente" type="text" required placeholder="Juan Pérez" />
+        <label for="documentoTitulo">Título del documento</label>
+        <input id="documentoTitulo" v-model="form.documentoTitulo" type="text" required />
       </div>
       <div>
-        <label for="fecha">Fecha del informe</label>
-        <input id="fecha" v-model="form.fechaInforme" type="date" required />
+        <label for="entorno">Entorno</label>
+        <input id="entorno" v-model="form.entorno" type="text" required />
       </div>
       <div>
-        <label for="importe">Importe total</label>
-        <input id="importe" v-model="form.importeTotal" type="number" step="0.01" min="0" required placeholder="0.00" />
+        <label for="plataforma">Plataforma</label>
+        <input id="plataforma" v-model="form.plataforma" type="text" required />
+      </div>
+      <div>
+        <label for="funcionalidad">Funcionalidad</label>
+        <input id="funcionalidad" v-model="form.funcionalidad" type="text" required />
+      </div>
+      <div>
+        <label for="version">Versión</label>
+        <input id="version" v-model="form.version" type="text" required />
+      </div>
+      <div>
+        <label for="destinatario">Destinatario</label>
+        <input id="destinatario" v-model="form.destinatario" type="text" required />
+      </div>
+      <div>
+        <label for="fecha">Fecha</label>
+        <input id="fecha" v-model="form.fecha" type="date" required />
+      </div>
+      <div>
+        <label for="revision">Revisión</label>
+        <input id="revision" v-model="form.revision" type="text" required />
+      </div>
+      <div>
+        <label for="cliente">Cliente</label>
+        <input id="cliente" v-model="form.cliente" type="text" required />
       </div>
     </div>
     <button type="submit" :disabled="loading">{{ loading ? 'Generando...' : 'Generar informe' }}</button>
@@ -26,9 +50,15 @@ import axios from 'axios';
 import { reactive, ref } from 'vue';
 
 const form = reactive({
-  nombreCliente: '',
-  fechaInforme: '',
-  importeTotal: ''
+  documentoTitulo: 'DOCUMENTO DE INSTALACIÓN',
+  entorno: 'PRODUCCIÓN',
+  plataforma: 'PCM',
+  funcionalidad: 'Alarmado Tráfico Internacional',
+  version: '5.4.0',
+  destinatario: 'Telefónica Móviles España',
+  fecha: '2025-11-10',
+  revision: '1.0',
+  cliente: 'TME'
 });
 
 const loading = ref(false);
@@ -42,12 +72,15 @@ const submitForm = async () => {
   resetMessage();
   loading.value = true;
   try {
-    const response = await axios.post('/api/report', {
-      ...form,
-      importeTotal: form.importeTotal ? Number(form.importeTotal) : null
-    }, {
-      responseType: 'blob'
-    });
+    const response = await axios.post(
+      '/api/report',
+      {
+        ...form
+      },
+      {
+        responseType: 'blob'
+      }
+    );
 
     const blob = new Blob([response.data], { type: 'application/pdf' });
     const url = window.URL.createObjectURL(blob);

@@ -3,7 +3,6 @@ package com.codex.jasper.backend.service;
 import com.codex.jasper.backend.model.ReportRequest;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
@@ -45,9 +44,15 @@ public class ReportService {
 
     private Map<String, Object> buildParameters(ReportRequest request) {
         Map<String, Object> parameters = new HashMap<>();
-        parameters.put("nombreCliente", request.getNombreCliente());
-        parameters.put("fechaInforme", Date.from(request.getFechaInforme().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        parameters.put("importeTotal", request.getImporteTotal() != null ? request.getImporteTotal() : BigDecimal.ZERO);
+        parameters.put("documentoTitulo", request.getDocumentoTitulo());
+        parameters.put("entorno", request.getEntorno());
+        parameters.put("plataforma", request.getPlataforma());
+        parameters.put("funcionalidad", request.getFuncionalidad());
+        parameters.put("version", request.getVersion());
+        parameters.put("destinatario", request.getDestinatario());
+        parameters.put("fecha", Date.from(request.getFecha().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        parameters.put("revision", request.getRevision());
+        parameters.put("cliente", request.getCliente());
         return parameters;
     }
 }

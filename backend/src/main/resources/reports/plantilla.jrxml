@@ -1,45 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Plantilla sencilla para demostrar la generación del informe -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
-    name="plantilla" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c2cde073-0e52-4a04-83a0-57c7ea46d8d9">
-    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
-    <parameter name="nombreCliente" class="java.lang.String"/>
-    <parameter name="fechaInforme" class="java.util.Date"/>
-    <parameter name="importeTotal" class="java.math.BigDecimal"/>
+    name="portada-instalacion" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20"
+    uuid="4a0cf2c8-6c6f-4a33-8c3e-5b62ec8d7af4">
+    <parameter name="documentoTitulo" class="java.lang.String"/>
+    <parameter name="entorno" class="java.lang.String"/>
+    <parameter name="plataforma" class="java.lang.String"/>
+    <parameter name="funcionalidad" class="java.lang.String"/>
+    <parameter name="version" class="java.lang.String"/>
+    <parameter name="destinatario" class="java.lang.String"/>
+    <parameter name="fecha" class="java.util.Date"/>
+    <parameter name="revision" class="java.lang.String"/>
+    <parameter name="cliente" class="java.lang.String"/>
+
     <title>
-        <band height="120" splitType="Stretch">
-            <staticText>
-                <reportElement x="0" y="0" width="555" height="30" uuid="1d4b9dc1-e7df-4a08-a0ea-9e33c8c5286c"/>
-                <textElement textAlignment="Center">
-                    <font size="18" isBold="true"/>
+        <band height="420" splitType="Stretch">
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="180" backcolor="#f0f4fa" uuid="1f56c2b9-7d64-4c12-8e7d-0b56d4cdf6a2"/>
+            </rectangle>
+            <textField>
+                <reportElement x="0" y="20" width="555" height="36" uuid="9ae5b69d-8c0f-4c75-98c5-0ee1837f5522"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="20" isBold="true"/>
                 </textElement>
-                <text><![CDATA[Informe de ejemplo JasperReports]]></text>
-            </staticText>
+                <textFieldExpression><![CDATA[$P{documentoTitulo}]]></textFieldExpression>
+            </textField>
             <line>
-                <reportElement x="0" y="34" width="555" height="1" uuid="e37e80b1-afd7-4d93-8d74-f9d8c6e9080d"/>
+                <reportElement x="120" y="60" width="315" height="1" forecolor="#2d4f8b" uuid="0f8a169b-30a8-4c6e-a733-8a2d7ed21b7c"/>
             </line>
             <textField>
-                <reportElement x="0" y="50" width="555" height="20" uuid="bfb95c32-3e13-4d20-9e8b-c5f7b7146c40"/>
-                <textElement>
+                <reportElement x="0" y="70" width="555" height="24" uuid="1d3d0af9-78f7-4c9b-a41a-321be6b565f5"/>
+                <textElement textAlignment="Center">
+                    <font size="14" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{entorno}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="98" width="555" height="22" uuid="d59b6844-340d-4e60-8f99-c15889b1cc87"/>
+                <textElement textAlignment="Center">
                     <font size="12"/>
                 </textElement>
-                <textFieldExpression><![CDATA["Cliente: " + $P{nombreCliente}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$P{plataforma}]]></textFieldExpression>
             </textField>
-            <textField pattern="dd/MM/yyyy">
-                <reportElement x="0" y="75" width="555" height="20" uuid="5fa7e8a6-0f73-4c1a-9d67-5a7f54d9cb03"/>
-                <textElement>
-                    <font size="12"/>
+            <textField>
+                <reportElement x="0" y="128" width="555" height="26" uuid="7a10b4a5-fd9e-4a41-89eb-3a76d41092b6"/>
+                <textElement textAlignment="Center">
+                    <font size="14" isBold="true"/>
                 </textElement>
-                <textFieldExpression><![CDATA["Fecha del informe: " + $P{fechaInforme}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$P{funcionalidad}]]></textFieldExpression>
             </textField>
-            <textField pattern="#,##0.00" isBlankWhenNull="true">
-                <reportElement x="0" y="100" width="555" height="20" uuid="ac6dc600-84e4-4bc1-81bd-46b10d9f61e4"/>
-                <textElement>
-                    <font size="12"/>
+            <textField>
+                <reportElement x="0" y="160" width="555" height="20" uuid="090f91bb-c7e7-4bcd-9b7b-90f0e0910661"/>
+                <textElement textAlignment="Center">
+                    <font size="11"/>
                 </textElement>
-                <textFieldExpression><![CDATA["Importe total: " + $P{importeTotal}]]></textFieldExpression>
+                <textFieldExpression><![CDATA["Versión " + $P{version}]]></textFieldExpression>
             </textField>
+
+            <textField>
+                <reportElement x="0" y="220" width="555" height="22" uuid="f77ebe38-4db9-4a6c-a6e4-9279409ddc3a"/>
+                <textElement textAlignment="Center">
+                    <font size="12" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Para"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="245" width="555" height="26" uuid="25273333-43bf-4157-83d7-75d4e0d767c9"/>
+                <textElement textAlignment="Center">
+                    <font size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{destinatario}]]></textFieldExpression>
+            </textField>
+
+            <frame>
+                <reportElement x="120" y="290" width="315" height="110" uuid="ac6d9d67-27a8-455a-94e5-6293a8986b65"/>
+                <staticText>
+                    <reportElement x="0" y="0" width="120" height="20" uuid="4a90b00d-574d-4d45-a287-5a8e329fcb0f"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <font size="11" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Fecha:]]></text>
+                </staticText>
+                <textField pattern="dd/MM/yyyy">
+                    <reportElement x="130" y="0" width="185" height="20" uuid="4319c6fc-a15b-4c80-9ef7-8e9da032f2eb"/>
+                    <textElement textAlignment="Right"/>
+                    <textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+                </textField>
+
+                <staticText>
+                    <reportElement x="0" y="38" width="120" height="20" uuid="8b017fb7-a0cd-43ea-8d30-9c30b9fc0cf0"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <font size="11" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Revisión:]]></text>
+                </staticText>
+                <textField>
+                    <reportElement x="130" y="38" width="185" height="20" uuid="b37f6e5a-a5d0-4057-90f8-9ffde2625ac8"/>
+                    <textElement textAlignment="Right"/>
+                    <textFieldExpression><![CDATA[$P{revision}]]></textFieldExpression>
+                </textField>
+
+                <staticText>
+                    <reportElement x="0" y="76" width="120" height="20" uuid="b0bc663c-77c2-42dd-9df6-08f7afff7a80"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <font size="11" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Cliente:]]></text>
+                </staticText>
+                <textField>
+                    <reportElement x="130" y="76" width="185" height="20" uuid="fe137db0-6472-49d5-92da-bb1f3c1ff1f6"/>
+                    <textElement textAlignment="Right"/>
+                    <textFieldExpression><![CDATA[$P{cliente}]]></textFieldExpression>
+                </textField>
+            </frame>
         </band>
     </title>
 </jasperReport>
