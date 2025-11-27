@@ -253,7 +253,7 @@ Una vez creada la plantilla Jasper:
 
 ## Flujo funcional (Fase 2)
 
-1. El usuario accede a la web Codex y ve el **formulario**.
+1. El usuario accede a la web y ve el **formulario**.
 2. Introduce los datos que corresponden a los campos del informe (por ejemplo: nombre, fecha, importes, etc.).
 3. Pulsa en **“Generar informe”**.
 4. El frontend envía un `POST` con JSON al endpoint del backend.
